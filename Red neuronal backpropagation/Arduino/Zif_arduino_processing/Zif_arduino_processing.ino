@@ -1,6 +1,6 @@
 #include <NewPing.h>
 
-#define DISTANCIA 60
+#define DISTANCIA 25
 //trigger,echo,max distance
 NewPing sonar1(8, 7, 200);
 NewPing sonar2(6, 5, 200);
@@ -16,6 +16,7 @@ char val;
 int bocina = 13; 
 
 void avanzar(){
+  digitalWrite(bocina,LOW);
   digitalWrite(motorA1,HIGH);
   digitalWrite(motorA2,LOW);
   digitalWrite(motorB1,LOW);
@@ -24,6 +25,7 @@ void avanzar(){
 }
 
 void retroceder(){
+  digitalWrite(bocina,LOW);
   digitalWrite(motorA1,LOW);
   digitalWrite(motorA2,HIGH);
   digitalWrite(motorB1,HIGH);
@@ -31,6 +33,7 @@ void retroceder(){
 }
 
 void alto(){
+  digitalWrite(bocina,LOW);
   digitalWrite(motorA1,LOW);
   digitalWrite(motorA2,LOW);
   digitalWrite(motorB1,LOW);
@@ -38,6 +41,7 @@ void alto(){
 }
 
 void girarDerecha(){
+  digitalWrite(bocina,LOW);
   digitalWrite(motorA1,HIGH);
   digitalWrite(motorA2,LOW);
   digitalWrite(motorB1,HIGH);
@@ -45,6 +49,15 @@ void girarDerecha(){
 }
 
 void girarIzquierda(){
+  digitalWrite(bocina,LOW);
+  digitalWrite(motorA1,LOW);
+  digitalWrite(motorA2,HIGH);
+  digitalWrite(motorB1,LOW);
+  digitalWrite(motorB2,HIGH);
+}
+
+void deteccionVision(){
+  digitalWrite(bocina,HIGH);
   digitalWrite(motorA1,LOW);
   digitalWrite(motorA2,HIGH);
   digitalWrite(motorB1,LOW);
@@ -52,13 +65,14 @@ void girarIzquierda(){
 }
 
 void setup() {
-  // put your setup code here, to run once:
+  // put your setup code here, to run once:1111111111111111111111111111111111111111111111111111111
  Serial.begin(115200);
  pinMode(motorA1,OUTPUT);
  pinMode(motorA2,OUTPUT);
  pinMode(motorB1,OUTPUT);
  pinMode(motorB2,OUTPUT);
  pinMode(bocina,OUTPUT);
+ digitalWrite(bocina,LOW);
 }
 
 void loop() {
@@ -94,22 +108,22 @@ void loop() {
    }
    if (val == '1') 
    { 
-     digitalWrite(bocina,LOW);
      avanzar();
    } 
     if (val == '2') 
    { 
-    digitalWrite(bocina,HIGH);
     girarDerecha();
    } 
     if (val == '3') 
    { 
-    digitalWrite(bocina,HIGH);
     girarIzquierda();
-   } 
+   }
+   if (val == '4') 
+   { 
+    deteccionVision();
+   }  
    if (val == '0') 
    { 
-    digitalWrite(bocina,LOW);
     alto();
    } 
    
