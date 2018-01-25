@@ -6,7 +6,7 @@ NewPing sonar2(6, 5, 200);
 NewPing sonar3(4, 3, 200);
  
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
  
 void loop() {
